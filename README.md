@@ -11,5 +11,11 @@ git clone https://github.com/pkreyenhop/emacsdoomconfig.git ~/.doom.d
 curl -O https://beta.quicklisp.org/quicklisp.lisp
 sbcl --load quicklisp.lisp
 ```
-Evaluate `(quicklisp-quickstart:install)`
-To test evaluate: (ql:quickload :asdf)
+At the SBCL command prompt evaluate:
+
+```
+(quicklisp-quickstart:install)
+(ql:add-to-init-file)
+```
+To test evaluate `(ql:quickload :asdf)`
+
