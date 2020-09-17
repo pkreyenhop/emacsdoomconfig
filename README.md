@@ -19,3 +19,24 @@ At the SBCL command prompt evaluate:
 ```
 To test evaluate `(ql:quickload :asdf)`
 
+# How to give SBCL a nice REPL with linedit
+
+At the SBCL command prompt evaluate:
+
+```
+(ql:quickload :linedit)
+```
+
+Add the following lines to the end of your .sbclrc
+
+```
+;;; Check for --no-linedit command-line option.
+(if (member "--no-linedit" sb-ext:*posix-argv* :test 'equal)
+    (setf sb-ext:*posix-argv* 
+	  (remove "--no-linedit" sb-ext:*posix-argv* :test 'equal))
+    (when (interactive-stream-p *terminal-io*)
+      (require :sb-aclrepl)
+      (require :linedit)
+      (funcall (intern "INSTALL-REPL" :linedit) :wrap-current t)))
+      
+```
